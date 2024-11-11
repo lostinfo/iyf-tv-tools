@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "爱壹帆TV助手",
+  "description": "爱壹帆TV助手",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "apple-icon-120x120.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["play.js"],
+      "matches": [
+        "https://www.iyf.tv/play/*"
+      ]
+    }
+  ]
+}
