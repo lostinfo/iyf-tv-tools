@@ -1,24 +1,29 @@
-function initTools() {
-    console.log('爱壹帆TV助手 load success.')
-    const video_wrapper_class = 'video-player'
+function hackPlayer() {
+    console.log('爱壹帆TV助手 hack success.')
     const ad_class = ['pggf', 'dabf', 'overlay-logo']
 
 // 1.remove
 // ad
     for (let i in ad_class) {
-        document.getElementsByClassName(ad_class[i]) && document.getElementsByClassName(ad_class[i])[0].remove()
+        let ad = document.getElementsByClassName(ad_class[i])
+        ad instanceof HTMLCollection && ad.length > 0 && ad[0].remove()
     }
-
-// 2.resize player
-    const video_player_wrapper = document.getElementsByClassName(video_wrapper_class)[0]
-    video_player_wrapper.style.width = '100%'
 
 // 3.add action
     const video_player = document.getElementById('video_player')
     const main_player = document.getElementById('main-player')
-    const action_wrap = document.getElementsByTagName('vg-controls')[1]
+    const controls = document.getElementsByTagName('vg-controls')
 
-    const pictureInPicture = document.createElement('div');
+    console.log(main_player, typeof main_player)
+
+    if (!main_player instanceof HTMLElement) return
+    if (!video_player instanceof HTMLElement) return
+    if (!controls instanceof HTMLCollection) return
+    const action_wrap = controls[1]
+    if (action_wrap === undefined) return
+
+
+    const pictureInPicture = document.createElement('div')
     pictureInPicture.className = 'control-item'
     pictureInPicture.innerText = '画中画'
     pictureInPicture.style.marginRight = '10px'
@@ -49,9 +54,34 @@ function initTools() {
     action_wrap.lastChild.appendChild(fullWindow)
 }
 
-let sh = setInterval(() => {
-    if (document.getElementById('main-player')) {
-        initTools()
-        clearInterval(sh)
+function startHackPlayer() {
+    let sh = setInterval(() => {
+        let main_player = document.getElementById('main-player')
+        if (main_player instanceof HTMLElement && !main_player.hasAttribute('hack-success')) {
+            main_player.setAttribute('hack-success', 'true')
+            try {
+                hackPlayer()
+            } catch (e) {
+                console.log('hack fail,', e)
+            }
+            clearInterval(sh)
+        }
+    }, 500)
+}
+
+function isPlayPage() {
+    return location.href.includes('/play/')
+}
+
+startHackPlayer()
+
+let previousUrl = ''
+const observer = new MutationObserver(function (mutations) {
+    if (location.href !== previousUrl) {
+        previousUrl = location.href
+        if (isPlayPage()) {
+            startHackPlayer()
+        }
     }
-}, 200)
+});
+observer.observe(document, {subtree: true, childList: true})

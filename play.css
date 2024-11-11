@@ -6,6 +6,10 @@
     z-index: 9999;
 }
 
+.video-player {
+    width: 100% !important;
+}
+
 .pggf, .dabf, .overlay-logo {
     visibility: hidden;
 }
