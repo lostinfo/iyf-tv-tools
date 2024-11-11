@@ -10,6 +10,7 @@
   "content_scripts": [
     {
       "js": ["play.js"],
+      "css": ["play.css"],
       "matches": [
         "https://www.iyf.tv/play/*"
       ]

@@ -1,11 +1,7 @@
 function initTools() {
     console.log('爱壹帆TV助手 load success.')
-    const video_id = 'video_player'
     const video_wrapper_class = 'video-player'
     const ad_class = ['pggf', 'dabf', 'overlay-logo']
-    const video_logo_class = ''
-    const video_wrapper_top_class = 'aa-videoplayer-wrap'
-    const video_box_class = 'video-box'
 
 // 1.remove
 // ad
@@ -51,16 +47,6 @@ function initTools() {
         }
     })
     action_wrap.lastChild.appendChild(fullWindow)
-
-    const add_css = '*::-webkit-scrollbar { width: 0 !important; } #main-player.fullscreen { z-index: 9999; }'
-    let style = document.createElement('style')
-    document.head.appendChild(style)
-    style.type = 'text/css'
-    if (style.styleSheet) {
-        style.styleSheet.cssText = add_css
-    } else {
-        style.appendChild(document.createTextNode(add_css))
-    }
 }
 
 let sh = setInterval(() => {

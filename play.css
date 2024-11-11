@@ -1,0 +1,11 @@
+*::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+#main-player.fullscreen {
+    z-index: 9999;
+}
+
+.pggf, .dabf, .overlay-logo {
+    visibility: hidden;
+}
